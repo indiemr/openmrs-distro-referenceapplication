@@ -4,7 +4,7 @@
 #--------------------------------------------
 FROM --platform=$BUILDPLATFORM node:18-alpine as dev
 
-ARG APP_SHELL_VERSION=next
+ARG APP_SHELL_VERSION=latest
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -16,6 +16,10 @@ ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
 RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.'; exit 1; fi
+
+COPY spa_config.json ./spa/spa_config.json
+COPY indi_logo.svg ./spa/indi_logo.svg
+COPY indi_gscale_logo.svg ./spa/indi_gscale_logo.svg
 
 #--------------------------------------------
 # Runtime Stage - Published Image
@@ -36,6 +40,6 @@ RUN chmod +x /usr/local/bin/startup.sh
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dev /app/spa /usr/share/nginx/html
-COPY config-core_demo.json /usr/share/nginx/html
+COPY spa_config.json /usr/share/nginx/html
 
 CMD ["/usr/local/bin/startup.sh"]

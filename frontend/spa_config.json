@@ -1,6 +1,27 @@
 {
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#1b4361",
+    "Brand color #2": "#0bb0e3",
+    "Brand color #3": "#04dcda"
+  },
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "indi_logo.svg",
+      "alt": "logo"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "indi_logo.svg",
+      "alt": "logo"
+    }
+  },
   "@openmrs/esm-patient-chart-app": {
-    "showUpcomingAppointments": true
+    "showUpcomingAppointments": true,
+    "logo": {
+      "src": "indi_gscale_logo.svg",
+      "alt": "logo"
+    }
   },
   "@openmrs/esm-service-queues-app": {
     "priorityConfigs": [
@@ -32,8 +53,5 @@
     },
     "visitQueueNumberAttributeUuid": "",
     "defaultFacilityUrl": ""
-  },
-  "@openmrs/esm-styleguide": {
-    "Brand color #1": "#005d5d"
   }
 }
